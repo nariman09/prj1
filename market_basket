@@ -1,0 +1,30 @@
+market_basket = open("Market_Basket")
+with market_basket as file:
+lines = market_basket.readlines()
+number_of_transactions = lines[1][0]
+print("Number of Transactions is",number_of_transactions,"\n")
+transactions_in_list = []
+for x in range(2, int(number_of_transactions)+2):
+transactions_in_list.append(lines[x])
+transaction_in_string = ''
+temporary_list = []
+temporary_string = ''
+for y in range(int(number_of_transactions)):
+transaction_in_string = transactions_in_list[y]
+temporary_list = transaction_in_string.split('//',1)[0]
+temporary_list = temporary_list.replace(temporary_list[:6],'')
+temporary_list = temporary_list.replace('\n', ' ')
+temporary_list = temporary_list.replace(',', '')
+temporary_string = temporary_string + temporary_list
+temporary_string = temporary_string[:-1]
+items_list = temporary_string.split(' ')
+print("Number of All Items in Market Basket is",len(items_list))
+print("All Items in Market Basket are:","\n\n",items_list,"\n")
+unique_items = set(temporary_string.split(' '))
+print("Number of Unique Items in Market Basket is",len(unique_items))
+print("Unique Items in Market Basket are:","\n\n",unique_items,"\n")
+print("Frequency of Items:","\n")
+for i in range(len(unique_items)):
+item_frequency = items_list.count(list(unique_items)[i])
+temporary_list_item = list(unique_items)[i]
+print(temporary_list_item,":",item_frequency)
